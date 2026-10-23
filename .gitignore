@@ -17,3 +17,6 @@ Credentials.txt
 *.docx
 CodeNova*
 extracted_doc.txt
+
+.vercel
+.env*

@@ -1,14 +1,25 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config/dist/index.js";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import path from "path";
 
 export default defineConfig({
-  cloudflare: false,
-  tanstackStart: {
-    server: { entry: "server" },
-  },
-  vite: {
-    server: {
-      port: 3000,
-      host: true,
+  plugins: [
+    TanStackRouterVite({
+      routesDirectory: "./src/routes",
+      generatedRouteTree: "./src/routeTree.gen.ts",
+    }),
+    react(),
+    tailwindcss(),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
+  },
+  server: {
+    port: 3000,
+    host: true,
   },
 });
