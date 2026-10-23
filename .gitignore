@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+dist
+.tanstack
+.cache
+.vercel
+
+# Environment & Local Secrets
+.env
+.env.local
+.env.*.local
+Credentials.txt
+
+# Local Desktop Reference Documents & Presentations
+*.pptx
+*.pdf
+*.docx
+CodeNova*
+extracted_doc.txt

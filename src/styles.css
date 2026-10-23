@@ -1,0 +1,330 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Figtree", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Figtree", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-brand-navy: #173B63;
+  --color-brand-navy-dark: #0F253F;
+  --color-brand-teal: #2B9C91;
+  --color-brand-teal-light: #E8F5F3;
+  --color-brand-bg: #F6F7F5;
+  --color-brand-bg-warm: #EFEFEA;
+  --color-brand-text: #12263A;
+  --color-brand-muted: #5A6E82;
+  --color-brand-border: #E1E6E2;
+  --color-brand-border-subtle: rgba(23, 59, 99, 0.08);
+  --color-brand-crisis: #C94C4C;
+}
+
+:root {
+  /* Brand constants */
+  --brand-navy: #173B63;
+  --brand-navy-dark: #0F253F;
+  --brand-teal: #2B9C91;
+  --brand-crisis: #C94C4C; /* semantic only — never decorative */
+
+  /* Light mode surfaces */
+  --surface-base:    #F6F7F5;
+  --surface-raised:  #FFFFFF;
+  --surface-sunken:  #EFEFEA;
+  --text-primary:    #12263A;
+  --text-secondary:  #4A5E73;
+  --text-muted:      #5A6E82;
+  --text-faint:      #8BA0B2;
+  --border-subtle:   #E1E6E2;
+  --border-hairline: rgba(23, 59, 99, 0.08);
+
+  /* Aliases */
+  --background: var(--surface-base);
+  --foreground: var(--text-primary);
+}
+
+/* ─── Dark Mode Palette ──────────────────────────────────────── */
+html.dark {
+  --surface-base:    #0c1c2e;   /* deep calm midnight blue */
+  --surface-raised:  #112237;   /* slightly lighter card bg */
+  --surface-sunken:  #091525;   /* deep sunken */
+  --text-primary:    #dce8f0;   /* soft cool white — NOT bright white */
+  --text-secondary:  #9ab5ca;   /* calm mid-blue */
+  --text-muted:      #6a92ad;   /* quiet muted */
+  --text-faint:      #3f6882;   /* very faint */
+  --border-subtle:   rgba(150, 200, 230, 0.10);
+  --border-hairline: rgba(150, 200, 230, 0.06);
+
+  --background: var(--surface-base);
+  --foreground: var(--text-primary);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--surface-base);
+    color: var(--text-primary);
+    transition: background-color 0.6s ease, color 0.6s ease;
+  }
+  body {
+    background-color: var(--surface-base);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.015em;
+    overflow-x: hidden;
+    transition: background-color 0.6s ease, color 0.6s ease;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+  }
+  ::selection {
+    background: #2B9C91;
+    color: #FFFFFF;
+  }
+  /* Sections adopt the base surface */
+  section {
+    background-color: var(--surface-base);
+    transition: background-color 0.6s ease;
+  }
+}
+
+@layer utilities {
+  /* ── Typography ─────────────────────────────────────────── */
+  .hero-headline {
+    font-size: clamp(3rem, 7.5vw, 7.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+  }
+  .editorial-chapter-title {
+    font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  .editorial-lead {
+    font-size: clamp(2rem, 4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .editorial-word {
+    font-size: clamp(2rem, 4.8vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  .editorial-body {
+    font-size: clamp(1.125rem, 1.25vw + 0.5rem, 1.35rem);
+    line-height: 1.6;
+    letter-spacing: -0.015em;
+  }
+
+  /* ── CSS-variable-based colour helpers ───────────────────── */
+  .text-surface-primary   { color: var(--text-primary); }
+  .text-surface-secondary { color: var(--text-secondary); }
+  .text-surface-muted     { color: var(--text-muted); }
+  .text-surface-faint     { color: var(--text-faint); }
+  .bg-surface             { background-color: var(--surface-base); }
+  .bg-surface-raised      { background-color: var(--surface-raised); }
+  .bg-surface-sunken      { background-color: var(--surface-sunken); }
+  .border-surface         { border-color: var(--border-subtle); }
+  .border-surface-hair    { border-color: var(--border-hairline); }
+
+  /* ── Hairlines using CSS vars ─────────────────────────────── */
+  .hairline-b { border-bottom: 1px solid var(--border-subtle); }
+  .hairline-t { border-top:    1px solid var(--border-subtle); }
+  .hairline-l { border-left:   1px solid var(--border-subtle); }
+  .hairline-r { border-right:  1px solid var(--border-subtle); }
+
+  /* ── Image ───────────────────────────────────────────────── */
+  .image-cinematic {
+    filter: contrast(1.03) brightness(0.98);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Logo white filter (safe for ALL svg colours) ────────── */
+  .logo-to-white {
+    filter: brightness(0) saturate(100%) invert(1);
+  }
+
+  /* ── Smooth section transitions ──────────────────────────── */
+  .section-transition {
+    transition: background-color 0.6s ease, border-color 0.6s ease;
+  }
+
+  /* ── Apple Design Foundations (WWDC Principles) ─────────── */
+
+  /* 1. Instant Physical Feedback (Response §1) */
+  .apple-press {
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms ease, box-shadow 200ms ease;
+    will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .apple-press:active {
+    transform: scale(0.965);
+    transition: transform 60ms ease-out;
+  }
+
+  /* 2. Apple Translucent Materials (Materials & Depth §12) */
+  .apple-glass-nav {
+    background-color: rgba(246, 247, 245, 0.76);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 20px -2px rgba(23, 59, 99, 0.05), 0 1px 2px rgba(23, 59, 99, 0.02);
+  }
+  html.dark .apple-glass-nav {
+    background-color: rgba(12, 28, 46, 0.72);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(255, 255, 255, 0.04) inset;
+  }
+
+  .apple-glass-card {
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 8px rgba(23, 59, 99, 0.03), 0 16px 36px -4px rgba(23, 59, 99, 0.06);
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease;
+  }
+  html.dark .apple-glass-card {
+    background-color: rgba(17, 34, 55, 0.65);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(150, 200, 230, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 16px 36px -4px rgba(0, 0, 0, 0.45);
+  }
+
+  /* 3. Apple Dual-Layer Shadows (Key Light + Ambient Diffuse) */
+  .apple-shadow-key {
+    box-shadow: 0 1px 2px rgba(23, 59, 99, 0.04), 0 10px 24px -2px rgba(23, 59, 99, 0.07);
+  }
+  html.dark .apple-shadow-key {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -4px rgba(0, 0, 0, 0.5);
+  }
+
+  .apple-shadow-ambient {
+    box-shadow: 0 20px 48px -8px rgba(23, 59, 99, 0.10);
+  }
+  html.dark .apple-shadow-ambient {
+    box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.60);
+  }
+
+  /* 4. Optical Sizing & Hierarchy (Typography §15) */
+  .apple-tracking-tight {
+    letter-spacing: -0.03em;
+  }
+  .apple-tracking-title {
+    letter-spacing: -0.02em;
+  }
+  .apple-tracking-body {
+    letter-spacing: -0.01em;
+  }
+  .apple-tracking-caps {
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* 5. Smooth Spring Curves (Springs §4) */
+  .spring-bounce {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Accessibility: Translucency fallback */
+@media (prefers-reduced-transparency: reduce) {
+  .apple-glass-nav {
+    background-color: #F6F7F5 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  html.dark .apple-glass-nav {
+    background-color: #0c1c2e !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .apple-glass-card {
+    background-color: #FFFFFF !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  html.dark .apple-glass-card {
+    background-color: #112237 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* ── Hero Moving Mesh Gradient Keyframes ──────────────────── */
+@keyframes meshDrift1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(6vw, -4vh, 0) scale(1.16) rotate(15deg);
+  }
+  100% {
+    transform: translate3d(-5vw, 5vh, 0) scale(0.92) rotate(-10deg);
+  }
+}
+
+@keyframes meshDrift2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-7vw, 6vh, 0) scale(1.18) rotate(-18deg);
+  }
+  100% {
+    transform: translate3d(4vw, -4vh, 0) scale(0.88) rotate(12deg);
+  }
+}
+
+@keyframes meshDrift3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-6vw, -5vh, 0) scale(1.14);
+  }
+  100% {
+    transform: translate3d(5vw, 4vh, 0) scale(0.94);
+  }
+}
+
+@keyframes meshDrift4 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4vw, 5vh, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-5vw, -3vh, 0) scale(0.95);
+  }
+}
+
+@keyframes meshDrift5 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-4vw, 4vh, 0) scale(1.2);
+  }
+  100% {
+    transform: translate3d(5vw, -3vh, 0) scale(0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mesh-orb {
+    animation: none !important;
+  }
+}
