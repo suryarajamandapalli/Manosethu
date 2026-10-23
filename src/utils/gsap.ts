@@ -1,8 +1,8 @@
 export async function getGsap() {
   if (typeof window === "undefined") return null;
   try {
-    const gsapModule = await import("gsap/dist/gsap.js");
-    const scrollTriggerModule = await import("gsap/dist/ScrollTrigger.js");
+    const gsapModule = await import("gsap");
+    const scrollTriggerModule = await import("gsap/ScrollTrigger");
     const gsap = (gsapModule as any).gsap || (gsapModule as any).default || gsapModule;
     const ScrollTrigger = (scrollTriggerModule as any).ScrollTrigger || (scrollTriggerModule as any).default || scrollTriggerModule;
     if (gsap && ScrollTrigger && typeof gsap.registerPlugin === "function") {
